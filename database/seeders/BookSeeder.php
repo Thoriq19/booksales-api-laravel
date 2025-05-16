@@ -33,6 +33,20 @@ class BookSeeder extends Seeder
                 'price' => 130000,
                 'published_at' => '1937-09-21'
             ],
+            [
+                'title' => "The Shining",
+                'author_id' => 4,
+                'genre_id' => 3,
+                'price' => 135000,
+                'published_at' => '1977-01-28',
+            ],
+            [
+                'title' => "Murder on the Orient Express",
+                'author_id' => 5,
+                'genre_id' => 4,
+                'price' => 99000,
+                'published_at' => '1934-01-01',
+            ],
         ];
 
         foreach ($books as $book) {

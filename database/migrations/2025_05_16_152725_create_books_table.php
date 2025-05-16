@@ -15,7 +15,7 @@ return new class extends Migration
     $table->id();
     $table->string('title');
     $table->foreignId('author_id')->constrained()->onDelete('cascade');
-    $table->foreignId('genre_id')->constrained()->onDelete('cascade');  // <--- pastikan ini ada
+    $table->foreignId('genre_id')->constrained()->onDelete('cascade');  
     $table->integer('price');
     $table->date('published_at');
     $table->timestamps();
