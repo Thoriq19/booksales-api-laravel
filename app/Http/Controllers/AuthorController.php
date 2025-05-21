@@ -33,7 +33,14 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'bio' => 'nullable|string',
+        ]);
+
+        $author = Author::create($validated);
+
+        return response()->json($author, 201);
     }
 
     /**
