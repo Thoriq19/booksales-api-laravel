@@ -46,9 +46,13 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Author $author)
+    public function show($id)
     {
-        //
+        $author = Author::find($id);
+        if (!$author) {
+            return response()->json(['message' => 'Author not found'], 404);
+        }
+        return response()->json($author);
     }
 
     /**
@@ -62,16 +66,33 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, $id)
     {
-        //
+        $author = Author::find($id);
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'bio' => 'nullable|string',
+    ]);
+
+    $author->update($request->all());
+
+    return response()->json([
+        'message' => 'Author updated successfully',
+        'author' => $author,
+    ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author)
+    public function destroy($id)
     {
-        //
+        $author = Author::find($id);
+        if (!$author) {
+            return response()->json(['message' => 'Author not found'], 404);
+        }
+
+        $author->delete();
+        return response()->json(['message' => 'Author deleted']);
     }
 }
