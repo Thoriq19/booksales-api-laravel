@@ -36,11 +36,16 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'api' => [ // <<--- Periksa bagian ini
+        'driver' => 'jwt', // <<--- Pastikan drivernya 'jwt'
+        'provider' => 'users', // <<--- Pastikan ini menunjuk ke provider yang valid, biasanya 'users'
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------

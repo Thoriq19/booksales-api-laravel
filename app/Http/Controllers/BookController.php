@@ -15,7 +15,7 @@ class BookController extends Controller
         $books = Book::with('author')->get();
         return response()->json([
             "success" => true,
-            "massage" => "Get All Resource",
+            "message" => "Get All Resource",
             "data" => $books
         ], 200);
     }
@@ -33,15 +33,29 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'author_id' => 'required|exists:authors,id',
+        'genre_id' => 'required|exists:genres,id',
+    ]);
+
+    // Simpan data buku baru
+    $books = Book::create($validated);
+
+    // Kembalikan response JSON
+    return response()->json($books, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $books = Book::find($id);
+        if (!$books) {
+            return response()->json(['message' => 'Book not found'], 404);
+        }
+        return response()->json($books);
     }
 
     /**
@@ -55,16 +69,34 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+         $books = Book::find($id);
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'author_id' => 'sometimes|required|exists:authors,id',
+        'genre_id' => 'sometimes|required|exists:genres,id'
+    ]);
+
+    $books->update($request->all());
+
+    return response()->json([
+        'message' => 'Book updated successfully',
+        'data' => $books,
+    ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        $books = Book::find($id);
+        if (!$books) {
+            return response()->json(['message' => 'Book not found'], 404);
+        }
+
+        $books->delete();
+        return response()->json(['message' => 'Book deleted']);
     }
 }
