@@ -17,6 +17,7 @@ return new class extends Migration
     $table->foreignId('author_id')->constrained()->onDelete('cascade');
     $table->foreignId('genre_id')->constrained()->onDelete('cascade');  
     $table->integer('price');
+    $table->integer('stock')->default(0);
     $table->date('published_at');
     $table->timestamps();
 });

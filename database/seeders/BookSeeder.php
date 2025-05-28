@@ -17,6 +17,7 @@ class BookSeeder extends Seeder
                 'author_name' => 'J.K. Rowling',
                 'genre_name' => 'Fantasy',
                 'price' => 120000,
+                'stock' => 20,
                 'published_at' => '1997-06-26'
             ],
             [
@@ -24,6 +25,7 @@ class BookSeeder extends Seeder
                 'author_name' => 'George R.R. Martin',
                 'genre_name' => 'Fantasy',
                 'price' => 150000,
+                'stock' => 20,
                 'published_at' => '1996-08-06'
             ],
             [
@@ -31,6 +33,7 @@ class BookSeeder extends Seeder
                 'author_name' => 'J.R.R. Tolkien',
                 'genre_name' => 'Fantasy',
                 'price' => 130000,
+                'stock' => 20,
                 'published_at' => '1937-09-21'
             ],
             [
@@ -38,6 +41,7 @@ class BookSeeder extends Seeder
                 'author_name' => 'Stephen King',
                 'genre_name' => 'Mystery',
                 'price' => 135000,
+                'stock' => 20,
                 'published_at' => '1977-01-28',
             ],
             [
@@ -45,6 +49,7 @@ class BookSeeder extends Seeder
                 'author_name' => 'Agatha Christie',
                 'genre_name' => 'Mystery',
                 'price' => 99000,
+                'stock' => 20,
                 'published_at' => '1934-01-01',
             ],
         ];
@@ -59,6 +64,7 @@ class BookSeeder extends Seeder
                     'author_id' => $author->id,
                     'genre_id' => $genre->id,
                     'price' => $book['price'],
+                    'stock' => $book['stock'],
                     'published_at' => $book['published_at'],
                 ]);
             }

@@ -75,7 +75,8 @@ class BookController extends Controller
         $request->validate([
         'name' => 'required|string|max:255',
         'author_id' => 'sometimes|required|exists:authors,id',
-        'genre_id' => 'sometimes|required|exists:genres,id'
+        'genre_id' => 'sometimes|required|exists:genres,id',
+         'stock' => 'required|integer|min:0'
     ]);
 
     $books->update($request->all());
